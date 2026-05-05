@@ -4,6 +4,7 @@
 		"activities": [
 			{
 				"name": "CopyData_mayfourth",
+				"description": "version lab",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
