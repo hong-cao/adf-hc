@@ -2,7 +2,7 @@
 	"name": "DS_Sales_Input",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "LS_file_validation_hc",
+			"referenceName": "LS_mayfourth",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
