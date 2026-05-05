@@ -13,7 +13,11 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "FltValidQuantity"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          OrderID as short,",
@@ -23,7 +27,8 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> SrcSalesInput"
+				"     ignoreNoFilesFound: false) ~> SrcSalesInput",
+				"SrcSalesInput filter(Quantity > 0) ~> FltValidQuantity"
 			]
 		}
 	}
