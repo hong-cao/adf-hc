@@ -16,6 +16,9 @@
 			"transformations": [
 				{
 					"name": "FltValidQuantity"
+				},
+				{
+					"name": "DRVTotalAmount"
 				}
 			],
 			"scriptLines": [
@@ -28,7 +31,8 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> SrcSalesInput",
-				"SrcSalesInput filter(Quantity > 0) ~> FltValidQuantity"
+				"SrcSalesInput filter(Quantity > 0) ~> FltValidQuantity",
+				"FltValidQuantity derive(TotalAmount = Quantity * {Price }) ~> DRVTotalAmount"
 			]
 		}
 	}
