@@ -3,27 +3,11 @@
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
-			"sources": [
-				{
-					"dataset": {
-						"referenceName": "DS_Sales_Input",
-						"type": "DatasetReference"
-					},
-					"name": "SrcSalesInput"
-				}
-			],
+			"sources": [],
 			"sinks": [],
 			"transformations": [],
 			"scriptLines": [
-				"source(output(",
-				"          OrderID as short,",
-				"          Product as string,",
-				"          Quantity as short,",
-				"          {Price } as short",
-				"     ),",
-				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> SrcSalesInput"
+				""
 			]
 		}
 	}
