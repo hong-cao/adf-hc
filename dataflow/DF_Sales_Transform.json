@@ -16,10 +16,10 @@
 			"transformations": [],
 			"scriptLines": [
 				"source(output(",
-				"          OrderID as string,",
+				"          OrderID as short,",
 				"          Product as string,",
-				"          Quantity as string,",
-				"          {Price } as string",
+				"          Quantity as short,",
+				"          {Price } as short",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
