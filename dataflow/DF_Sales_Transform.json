@@ -12,7 +12,15 @@
 					"name": "SrcSalesInput"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_Sales_Output",
+						"type": "DatasetReference"
+					},
+					"name": "SNKSalesOutput"
+				}
+			],
 			"transformations": [
 				{
 					"name": "FltValidQuantity"
@@ -32,7 +40,22 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> SrcSalesInput",
 				"SrcSalesInput filter(Quantity > 0) ~> FltValidQuantity",
-				"FltValidQuantity derive(TotalAmount = Quantity * {Price }) ~> DRVTotalAmount"
+				"FltValidQuantity derive(TotalAmount = Quantity * {Price }) ~> DRVTotalAmount",
+				"DRVTotalAmount sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          SalesOrderNumber as string,",
+				"          SalesOrderLineNumber as string,",
+				"          OrderDate as string,",
+				"          CustomerName as string,",
+				"          EmailAddress as string,",
+				"          Item as string,",
+				"          Quantity as string,",
+				"          UnitPrice as string,",
+				"          TaxAmount as string",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> SNKSalesOutput"
 			]
 		}
 	}
