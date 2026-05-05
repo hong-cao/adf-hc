@@ -1,0 +1,24 @@
+{
+	"name": "ds_http_output",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_httpmayfourth",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "ds_output_http_mayfourth",
+				"container": "containerhttpmayfourth"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

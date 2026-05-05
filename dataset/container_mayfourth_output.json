@@ -1,0 +1,24 @@
+{
+	"name": "container_mayfourth_output",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_mayfourth",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "ds_mayfourth_output",
+				"container": "containeroutputmayfourth"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

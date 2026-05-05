@@ -1,0 +1,15 @@
+{
+	"name": "hcResourceMayFourth",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Enabled",
+			"editable": true
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "0a499205-2dfd-46b7-88c1-c6de81685395",
+		"tenantId": "987ce7b4-ae38-4c7a-924d-cebee3a28568"
+	}
+}
