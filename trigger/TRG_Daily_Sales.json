@@ -2,7 +2,7 @@
 	"name": "TRG_Daily_Sales",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
 		"pipelines": [
 			{
 				"pipelineReference": {
