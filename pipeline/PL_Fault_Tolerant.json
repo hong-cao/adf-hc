@@ -109,7 +109,10 @@
 						"Content-Type": "application/json"
 					},
 					"url": "https://jsonplaceholder.typicode.com/posts",
-					"body": "@{ \n\n  \"pipeline\": \"@{pipeline().Pipeline}\", \n\n  \"failedActivity\": \"Copy_Sales_Data\", \n\n  \"status\": \"FAILED\", \n\n  \"errorMessage\": \"@{variables('ErrorMessage')}\" \n\n} "
+					"body": {
+						"value": "{ \n\n  \"pipeline\": \"@{pipeline().Pipeline}\", \n\n  \"failedActivity\": \"Copy_Sales_Data\", \n\n  \"status\": \"FAILED\", \n\n  \"errorMessage\": \"@{variables('ErrorMessage')}\" \n\n} ",
+						"type": "Expression"
+					}
 				}
 			},
 			{
@@ -134,7 +137,10 @@
 				"typeProperties": {
 					"method": "POST",
 					"url": "https://jsonplaceholder.typicode.com/posts",
-					"body": "@{ \n\n  \"alertType\": \"PipelineFailure\", \n\n  \"pipeline\": \"@{pipeline().Pipeline}\", \n\n  \"message\": \"ADF pipeline failure detected\", \n\n  \"errorMessage\": \"@{variables('ErrorMessage')}\" \n\n} "
+					"body": {
+						"value": "{ \n\n  \"alertType\": \"PipelineFailure\", \n\n  \"pipeline\": \"@{pipeline().Pipeline}\", \n\n  \"message\": \"ADF pipeline failure detected\", \n\n  \"errorMessage\": \"@{variables('ErrorMessage')}\" \n\n} ",
+						"type": "Expression"
+					}
 				}
 			}
 		],
