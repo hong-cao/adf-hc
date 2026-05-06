@@ -1,0 +1,25 @@
+{
+	"name": "TRG_FileUpload_Sales",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "PL_OnFileUpload",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/containermayfourth/blobs/",
+			"blobPathEndsWith": ".csv",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/6ca0c07f-4cba-4c52-920e-4fc3453f0e38/resourceGroups/aishwar_rs_dubai/providers/Microsoft.Storage/storageAccounts/hcstoragemayfourth",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
