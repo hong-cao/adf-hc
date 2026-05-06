@@ -80,6 +80,34 @@
 					"variableName": "ErrorMessage",
 					"value": "@activity('Copy_Sales_Data').error.message "
 				}
+			},
+			{
+				"name": "Log_Error",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Handle_Error",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
+					"url": "https://jsonplaceholder.typicode.com/posts",
+					"body": "{ \n\n  \"pipeline\": \"@{pipeline().Pipeline}\", \n\n  \"failedActivity\": \"Copy_Sales_Data\", \n\n  \"status\": \"FAILED\", \n\n  \"errorMessage\": \"@{variables('ErrorMessage')}\" \n\n} "
+				}
 			}
 		],
 		"variables": {
