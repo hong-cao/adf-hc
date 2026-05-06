@@ -27,6 +27,10 @@
 			"type": "string",
 			"defaultValue": "https://kv-novaretail-1.vault.azure.net/"
 		},
+		"TRG_FileUpload_Sales_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/6ca0c07f-4cba-4c52-920e-4fc3453f0e38/resourceGroups/aishwar_rs_dubai/providers/Microsoft.Storage/storageAccounts/hcstoragemayfourth"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -72,6 +76,29 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "hcResourceMayFourth_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"TRG_FileUpload_Sales_properties_typeProperties_scope": {
+						"value": "[parameters('TRG_FileUpload_Sales_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'hcResourceMayFourth_ArmTemplate_0')]"
+			]
 		}
 	]
 }

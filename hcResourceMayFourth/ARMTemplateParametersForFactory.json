@@ -19,6 +19,9 @@
 		},
 		"LS_KeyVault_properties_typeProperties_baseUrl": {
 			"value": "https://kv-novaretail-1.vault.azure.net/"
+		},
+		"TRG_FileUpload_Sales_properties_typeProperties_scope": {
+			"value": "/subscriptions/6ca0c07f-4cba-4c52-920e-4fc3453f0e38/resourceGroups/aishwar_rs_dubai/providers/Microsoft.Storage/storageAccounts/hcstoragemayfourth"
 		}
 	}
 }
