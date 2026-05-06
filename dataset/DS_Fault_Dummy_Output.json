@@ -1,0 +1,23 @@
+{
+	"name": "DS_Fault_Dummy_Output",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_file_validation_hc",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "dummy_output.csv",
+				"container": "containeroutputmayfourth"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

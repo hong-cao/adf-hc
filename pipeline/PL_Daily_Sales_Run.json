@@ -1,0 +1,17 @@
+{
+	"name": "PL_Daily_Sales_Run",
+	"properties": {
+		"activities": [
+			{
+				"name": "Wait_5_Seconds",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 5
+				}
+			}
+		],
+		"annotations": []
+	}
+}

@@ -1,0 +1,62 @@
+{
+	"name": "DF_Sales_Transform",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_Sales_Input",
+						"type": "DatasetReference"
+					},
+					"name": "SrcSalesInput"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_Sales_Output",
+						"type": "DatasetReference"
+					},
+					"name": "SNKSalesOutput"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FltValidQuantity"
+				},
+				{
+					"name": "DRVTotalAmount"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          OrderID as short,",
+				"          Product as string,",
+				"          Quantity as short,",
+				"          {Price } as short",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> SrcSalesInput",
+				"SrcSalesInput filter(Quantity > 0) ~> FltValidQuantity",
+				"FltValidQuantity derive(TotalAmount = Quantity * {Price }) ~> DRVTotalAmount",
+				"DRVTotalAmount sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          SalesOrderNumber as string,",
+				"          SalesOrderLineNumber as string,",
+				"          OrderDate as string,",
+				"          CustomerName as string,",
+				"          EmailAddress as string,",
+				"          Item as string,",
+				"          Quantity as string,",
+				"          UnitPrice as string,",
+				"          TaxAmount as string",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> SNKSalesOutput"
+			]
+		}
+	}
+}
