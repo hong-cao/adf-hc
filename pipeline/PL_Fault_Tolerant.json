@@ -110,7 +110,7 @@
 					},
 					"url": "https://jsonplaceholder.typicode.com/posts",
 					"body": {
-						"value": "{ \n\n  \"pipeline\": \"@{pipeline().Pipeline}\", \n\n  \"failedActivity\": \"Copy_Sales_Data\", \n\n  \"status\": \"FAILED\", \n\n  \"errorMessage\": \"@{variables('ErrorMessage')}\" \n\n} ",
+						"value": "{ \n\"pipeline\": \"@{pipeline().Pipeline}\", \n\"failedActivity\": \"Copy_Sales_Data\", \n\"status\": \"FAILED\", \n\"errorMessage\": \"@{variables('ErrorMessage')}\" \n} ",
 						"type": "Expression"
 					}
 				}
@@ -138,7 +138,7 @@
 					"method": "POST",
 					"url": "https://jsonplaceholder.typicode.com/posts",
 					"body": {
-						"value": "{ \n\n  \"alertType\": \"PipelineFailure\", \n\n  \"pipeline\": \"@{pipeline().Pipeline}\", \n\n  \"message\": \"ADF pipeline failure detected\", \n\n  \"errorMessage\": \"@{variables('ErrorMessage')}\" \n\n} ",
+						"value": "{ \n\"alertType\": \"PipelineFailure\", \n \"pipeline\": \"@{pipeline().Pipeline}\", \n \"message\": \"ADF pipeline failure detected\", \n \"errorMessage\": \"@{variables('ErrorMessage')}\" \n} ",
 						"type": "Expression"
 					}
 				}
