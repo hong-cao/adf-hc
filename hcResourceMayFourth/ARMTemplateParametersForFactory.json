@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "hcResourceMayFourth"
+		},
+		"LS_file_validation_hc_connectionString": {
+			"value": ""
+		},
+		"LS_httpmayfourth_connectionString": {
+			"value": ""
+		},
+		"LS_mayfourth_connectionString": {
+			"value": ""
+		},
+		"HttpServer1_properties_typeProperties_url": {
+			"value": "https://github.com"
+		},
+		"LS_KeyVault_properties_typeProperties_baseUrl": {
+			"value": "https://kv-novaretail-1.vault.azure.net/"
+		}
+	}
+}
