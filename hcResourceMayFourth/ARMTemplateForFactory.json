@@ -926,7 +926,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "sales_event_processed",
+						"fileName": "sales_event_processed.csv",
 						"container": "containeroutputmayfourth"
 					},
 					"columnDelimiter": ",",
