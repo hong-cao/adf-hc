@@ -134,10 +134,7 @@
 				"typeProperties": {
 					"method": "POST",
 					"url": "https://jsonplaceholder.typicode.com/posts",
-					"body": {
-						"value": "{ \n\n  \"alertType\": \"PipelineFailure\", \n\n  \"pipeline\": \"@{pipeline().Pipeline}\", \n\n  \"message\": \"ADF pipeline failure detected\", \n\n  \"errorMessage\": \"@{variables('ErrorMessage')}\" \n\n} ",
-						"type": "Expression"
-					}
+					"body": "@{ \n\n  \"alertType\": \"PipelineFailure\", \n\n  \"pipeline\": \"@{pipeline().Pipeline}\", \n\n  \"message\": \"ADF pipeline failure detected\", \n\n  \"errorMessage\": \"@{variables('ErrorMessage')}\" \n\n} "
 				}
 			}
 		],
