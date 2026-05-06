@@ -1,0 +1,23 @@
+{
+	"name": "DS_Sales_Missing",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_file_validation_hc",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "sales_missing.csv",
+				"container": "containermayfourth"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
