@@ -2,7 +2,7 @@
 	"name": "TRG_Daily_Sales",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
 		"pipelines": [
 			{
 				"pipelineReference": {
@@ -16,7 +16,7 @@
 			"recurrence": {
 				"frequency": "Day",
 				"interval": 1,
-				"startTime": "2026-05-06T12:20:00",
+				"startTime": "2026-05-06T12:22:00",
 				"timeZone": "Eastern Standard Time"
 			}
 		}
