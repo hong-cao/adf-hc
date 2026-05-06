@@ -59,6 +59,27 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Handle_Error",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Copy_Sales_Data",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "ErrorMessage",
+					"value": "@activity('Copy_Sales_Data').error.message "
+				}
 			}
 		],
 		"variables": {
