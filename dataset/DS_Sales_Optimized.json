@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "sales_output_optimized",
+				"fileName": "sales_output_optimized.csv",
 				"container": "containeroutputmayfourth"
 			},
 			"columnDelimiter": ",",
