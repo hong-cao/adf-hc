@@ -1,0 +1,23 @@
+{
+	"name": "DS_Sales_Gov_Output",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_mayfourth",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "sales_governance_output.csv",
+				"container": "containeroutputmayfourth"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
