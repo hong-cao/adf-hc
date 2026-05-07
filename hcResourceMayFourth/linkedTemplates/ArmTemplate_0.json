@@ -151,6 +151,79 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DS_Sales_Event_File')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_mayfourth",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "sales_event.csv",
+						"container": "containermayfourth"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "OrderID",
+						"type": "String"
+					},
+					{
+						"name": "Product",
+						"type": "String"
+					},
+					{
+						"name": "Quantity",
+						"type": "String"
+					},
+					{
+						"name": "Price",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_mayfourth')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_Sales_Event_Output')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_mayfourth",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "sales_event_processed.csv",
+						"container": "containeroutputmayfourth"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_mayfourth')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DS_Sales_File')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -495,8 +568,7 @@
 						"frequency": "Day",
 						"interval": 1,
 						"startTime": "2026-05-06T12:22:00",
-						"timeZone": "Eastern Standard Time",
-						"schedule": {}
+						"timeZone": "Eastern Standard Time"
 					}
 				}
 			},
@@ -505,7 +577,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DS_Sales_Event_File')]",
+			"name": "[concat(parameters('factoryName'), '/DS_Sales_Large')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -518,7 +590,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "sales_event.csv",
+						"fileName": "sales_large.csv",
 						"container": "containermayfourth"
 					},
 					"columnDelimiter": ",",
@@ -550,7 +622,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DS_Sales_Event_Output')]",
+			"name": "[concat(parameters('factoryName'), '/DS_Sales_Optimized')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -563,7 +635,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "sales_event_processed.csv",
+						"fileName": "sales_output_optimized.csv",
 						"container": "containeroutputmayfourth"
 					},
 					"columnDelimiter": ",",
@@ -575,251 +647,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/LS_mayfourth')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PL_Fault_Tolerant')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy_Sales_Data",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 2,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "DS_Sales_Missing",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "DS_Fault_Dummy_Output",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "Handle_Error",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Copy_Sales_Data",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "ErrorMessage",
-							"value": {
-								"value": "@activity('Copy_Sales_Data').error.message ",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Log_Error",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "Handle_Error",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"method": "POST",
-							"headers": {
-								"Content-Type": "application/json"
-							},
-							"url": "https://jsonplaceholder.typicode.com/posts",
-							"body": {
-								"value": "{ \n\"pipeline\": \"@{pipeline().Pipeline}\", \n\"failedActivity\": \"Copy_Sales_Data\", \n\"status\": \"FAILED\", \n\"errorMessage\": \"@{variables('ErrorMessage')}\" \n} ",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Send_Alert",
-						"type": "WebActivity",
-						"dependsOn": [
-							{
-								"activity": "Log_Error",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"method": "POST",
-							"headers": {},
-							"url": "https://jsonplaceholder.typicode.com/posts",
-							"body": {
-								"value": "{ \n\"alertType\": \"PipelineFailure\", \n \"pipeline\": \"@{pipeline().Pipeline}\", \n \"message\": \"ADF pipeline failure detected\", \n \"errorMessage\": \"@{variables('ErrorMessage')}\" \n} ",
-								"type": "Expression"
-							}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"variables": {
-					"ErrorMessage": {
-						"type": "String"
-					}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/DS_Sales_Missing')]",
-				"[concat(variables('factoryId'), '/datasets/DS_Fault_Dummy_Output')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pipeline_copy_mayfourth')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "CopyData_mayfifth",
-						"description": "version lab",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "container_mayfourth_source",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "container_mayfourth_output",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2026-05-04T17:55:40Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/container_mayfourth_source')]",
-				"[concat(variables('factoryId'), '/datasets/container_mayfourth_output')]"
 			]
 		}
 	]
