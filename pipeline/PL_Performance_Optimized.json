@@ -79,7 +79,7 @@
 						"type": "DelimitedTextSource",
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
-							"recursive": false,
+							"recursive": true,
 							"enablePartitionDiscovery": true
 						},
 						"formatSettings": {
@@ -97,13 +97,7 @@
 							"fileExtension": ".txt"
 						}
 					},
-					"enableStaging": true,
-					"stagingSettings": {
-						"linkedServiceName": {
-							"referenceName": "LS_mayfourth",
-							"type": "LinkedServiceReference"
-						}
-					},
+					"enableStaging": false,
 					"parallelCopies": 8,
 					"translator": {
 						"type": "TabularTranslator",
