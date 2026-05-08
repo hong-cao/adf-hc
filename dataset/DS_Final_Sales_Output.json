@@ -1,0 +1,23 @@
+{
+	"name": "DS_Final_Sales_Output",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_mayfourth",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "final_sales_output.csv",
+				"container": "containeroutputmayfourth"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
