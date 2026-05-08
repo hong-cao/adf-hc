@@ -11,6 +11,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "final_sales_output.csv",
+				"folderPath": "lab12",
 				"container": "containeroutputmayfourth"
 			},
 			"columnDelimiter": ",",
