@@ -29,6 +29,9 @@
 				},
 				{
 					"name": "CSplitSaleType"
+				},
+				{
+					"name": "AggCategoryRevenue"
 				}
 			],
 			"scriptLines": [
@@ -68,7 +71,11 @@
 				"          LookupStatus = iif(isMatch(), 'Matched', 'Unmatched')) ~> DrvBusinessColumns",
 				"DrvBusinessColumns split(SaleType == 'HighValue',",
 				"     LookupStatus == 'Unmatched',",
-				"     disjoint: false) ~> CSplitSaleType@(HighValueSales, UnmatchedSales, StandardMatchedSales)"
+				"     disjoint: false) ~> CSplitSaleType@(HighValueSales, UnmatchedSales, StandardMatchedSales)",
+				"CSplitSaleType@StandardMatchedSales aggregate(groupBy(Category,",
+				"          {} = ERROR_FUNCTION('')),",
+				"     CategoryRevenue = sum(TotalWithTax),",
+				"          TransactionCount = count(1)) ~> AggCategoryRevenue"
 			]
 		}
 	}
