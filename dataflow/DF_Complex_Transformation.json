@@ -32,6 +32,9 @@
 				},
 				{
 					"name": "AggCategoryRevenue"
+				},
+				{
+					"name": "UnnRecombinedSales"
 				}
 			],
 			"scriptLines": [
@@ -75,7 +78,8 @@
 				"CSplitSaleType@StandardMatchedSales aggregate(groupBy(Category,",
 				"          {} = ERROR_FUNCTION('')),",
 				"     {CategoryRevenue } = sum(TotalWithTax),",
-				"          TransactionCount = count(GrossAmount)) ~> AggCategoryRevenue"
+				"          TransactionCount = count(GrossAmount)) ~> AggCategoryRevenue",
+				"CSplitSaleType@HighValueSales, CSplitSaleType@StandardMatchedSales, CSplitSaleType@UnmatchedSales union(byName: true)~> UnnRecombinedSales"
 			]
 		}
 	}
