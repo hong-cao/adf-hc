@@ -23,6 +23,12 @@
 			"transformations": [
 				{
 					"name": "LKPProductMaster"
+				},
+				{
+					"name": "DrvBusinessColumns"
+				},
+				{
+					"name": "CSplitSaleType"
 				}
 			],
 			"scriptLines": [
@@ -52,7 +58,17 @@
 				"SrcSales, SrcProducts lookup(Item == ProductName,",
 				"     multiple: false,",
 				"     pickup: 'any',",
-				"     broadcast: 'auto')~> LKPProductMaster"
+				"     broadcast: 'auto')~> LKPProductMaster",
+				"LKPProductMaster derive(GrossAmount = toDouble(ProductID)*toDouble(UnitPrice)\r",
+				",",
+				"          TotalWithTax = (toInteger(ProductID)*toDouble(UnitPrice)) + toDouble(TaxAmount),",
+				"          PriceVariance = toDouble(UnitPrice)-toDouble(ListPrice)\r",
+				",",
+				"          SaleType = iif(((toInteger(ProductID) * toDouble(UnitPrice)) + toDouble(TaxAmount)) > 3000, 'HighValue', 'Standard') ,",
+				"          LookupStatus = iif(isMatch(), 'Matched', 'Unmatched')) ~> DrvBusinessColumns",
+				"DrvBusinessColumns split(SaleType == 'HighValue',",
+				"     LookupStatus == 'Unmatched',",
+				"     disjoint: false) ~> CSplitSaleType@(HighValueSales, UnmatchedSales, StandardMatchedSales)"
 			]
 		}
 	}
