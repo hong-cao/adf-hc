@@ -75,7 +75,7 @@
 				"CSplitSaleType@StandardMatchedSales aggregate(groupBy(Category,",
 				"          {} = ERROR_FUNCTION('')),",
 				"     CategoryRevenue = sum(TotalWithTax),",
-				"          TransactionCount = count(1)) ~> AggCategoryRevenue"
+				"          TransactionCount = count(Item)) ~> AggCategoryRevenue"
 			]
 		}
 	}
