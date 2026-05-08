@@ -1,0 +1,23 @@
+{
+	"name": "DS_Category_Summary_Output",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_mayfourth",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "category_summary_output.csv ",
+				"container": "containeroutputmayfourth"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

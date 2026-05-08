@@ -19,7 +19,15 @@
 					"name": "SrcProducts"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_Category_Summary_Output",
+						"type": "DatasetReference"
+					},
+					"name": "SinkFinalSales"
+				}
+			],
 			"transformations": [
 				{
 					"name": "LKPProductMaster"
@@ -79,7 +87,11 @@
 				"          {} = ERROR_FUNCTION('')),",
 				"     {CategoryRevenue } = sum(TotalWithTax),",
 				"          TransactionCount = count(GrossAmount)) ~> AggCategoryRevenue",
-				"CSplitSaleType@HighValueSales, CSplitSaleType@StandardMatchedSales, CSplitSaleType@UnmatchedSales union(byName: true)~> UnnRecombinedSales"
+				"CSplitSaleType@HighValueSales, CSplitSaleType@StandardMatchedSales, CSplitSaleType@UnmatchedSales union(byName: true)~> UnnRecombinedSales",
+				"UnnRecombinedSales sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> SinkFinalSales"
 			]
 		}
 	}
