@@ -20,7 +20,11 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "LKPProductMaster"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          SalesOrderNumber as string,",
@@ -44,7 +48,11 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> SrcProducts"
+				"     ignoreNoFilesFound: false) ~> SrcProducts",
+				"SrcSales, SrcProducts lookup(Item == ProductName,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> LKPProductMaster"
 			]
 		}
 	}
