@@ -85,7 +85,7 @@
 				"     disjoint: false) ~> CSplitSaleType@(HighValueSales, UnmatchedSales, StandardMatchedSales)",
 				"CSplitSaleType@StandardMatchedSales aggregate(groupBy(Category,",
 				"          {} = ERROR_FUNCTION('')),",
-				"     {CategoryRevenue } = sum(TotalWithTax),",
+				"     CategoryRevenue = sum(TotalWithTax),",
 				"          TransactionCount = count(GrossAmount)) ~> AggCategoryRevenue",
 				"CSplitSaleType@HighValueSales, CSplitSaleType@StandardMatchedSales, CSplitSaleType@UnmatchedSales union(byName: true)~> UnnRecombinedSales",
 				"UnnRecombinedSales sink(allowSchemaDrift: true,",
