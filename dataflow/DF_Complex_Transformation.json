@@ -74,7 +74,8 @@
 				"     disjoint: false) ~> CSplitSaleType@(HighValueSales, UnmatchedSales, StandardMatchedSales)",
 				"CSplitSaleType@StandardMatchedSales aggregate(groupBy(Category,",
 				"          {} = ERROR_FUNCTION('')),",
-				"     {CategoryRevenue } = sum(TotalWithTax)) ~> AggCategoryRevenue"
+				"     {CategoryRevenue } = sum(TotalWithTax),",
+				"          TransactionCount = count(GrossAmount)) ~> AggCategoryRevenue"
 			]
 		}
 	}
